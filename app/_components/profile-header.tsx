@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AnimatedTitle } from "@/components/home/animated-title";
-import { ProfileBio } from "@/components/home/profile-bio";
+import { AnimatedTitle } from "@/app/_components/animated-title";
+import { ProfileBio } from "@/app/_components/profile-bio";
 import { profileConfig } from "@/config/profile";
 
-export default function ProfileHeader() {
+export function ProfileHeader() {
   return (
     <div className="relative">
       {/* Banner Section */}
@@ -22,7 +22,10 @@ export default function ProfileHeader() {
       <div className="relative">
         <div className="absolute -top-12 sm:-top-16 md:-top-20">
           <Avatar className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 border-4 border-background bg-background">
-            <AvatarImage src="https://github.com/shadcn.png" alt={profileConfig.name} />
+            <AvatarImage
+              src="https://github.com/shadcn.png"
+              alt={profileConfig.name}
+            />
             <AvatarFallback className="text-2xl font-semibold">
               AK
             </AvatarFallback>
@@ -40,3 +43,5 @@ export default function ProfileHeader() {
     </div>
   );
 }
+
+export default ProfileHeader;

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { TextAnimate } from "@/components/ui/text-animate";
-
 import { profileConfig } from "@/config/profile";
 
 const titles = profileConfig.titles;
@@ -36,3 +35,5 @@ export function AnimatedTitle() {
     </div>
   );
 }
+
+export default AnimatedTitle;

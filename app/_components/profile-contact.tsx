@@ -40,3 +40,5 @@ export function ProfileContact() {
     </div>
   );
 }
+
+export default ProfileContact;

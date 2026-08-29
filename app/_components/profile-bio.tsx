@@ -10,11 +10,16 @@ import { profileConfig } from "@/config/profile";
 
 const getSocialIcon = (iconName: string) => {
   switch (iconName) {
-    case "github": return <GithubLogo weight="regular" className="w-5 h-5" />;
-    case "x": return <XLogo weight="regular" className="w-5 h-5" />;
-    case "linkedin": return <LinkedinLogo weight="regular" className="w-5 h-5" />;
-    case "telegram": return <TelegramLogo weight="regular" className="w-5 h-5" />;
-    default: return null;
+    case "github":
+      return <GithubLogo weight="regular" className="w-5 h-5" />;
+    case "x":
+      return <XLogo weight="regular" className="w-5 h-5" />;
+    case "linkedin":
+      return <LinkedinLogo weight="regular" className="w-5 h-5" />;
+    case "telegram":
+      return <TelegramLogo weight="regular" className="w-5 h-5" />;
+    default:
+      return null;
   }
 };
 
@@ -28,18 +33,27 @@ export function ProfileBio() {
             Location
           </span>
           <div className="flex items-center gap-1.5 text-sm font-medium text-foreground">
-            <MapPinAreaIcon weight="regular" className="w-4 h-4 text-muted-foreground" />
+            <MapPinAreaIcon
+              weight="regular"
+              className="w-4 h-4 text-muted-foreground"
+            />
             <span>{profileConfig.location}</span>
           </div>
         </div>
-        
+
         <div className="flex flex-col gap-1">
           <span className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
             Email
           </span>
           <div className="flex items-center gap-1.5 text-sm font-medium text-foreground">
-            <EnvelopeSimpleIcon weight="regular" className="w-4 h-4 text-muted-foreground" />
-            <a href={`mailto:${profileConfig.email}`} className="hover:underline hover:text-primary transition-colors">
+            <EnvelopeSimpleIcon
+              weight="regular"
+              className="w-4 h-4 text-muted-foreground"
+            />
+            <a
+              href={`mailto:${profileConfig.email}`}
+              className="hover:underline hover:text-primary transition-colors"
+            >
               {profileConfig.email}
             </a>
           </div>
@@ -71,3 +85,5 @@ export function ProfileBio() {
     </div>
   );
 }
+
+export default ProfileBio;

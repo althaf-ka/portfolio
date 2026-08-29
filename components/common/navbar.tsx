@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MoonIcon } from "@phosphor-icons/react/dist/ssr";
 import { navbar_config } from "@/config/navbar";
+import { SoundToggle } from "@/components/common/sound-toggle";
 
 const Navbar = () => {
   return (
@@ -21,7 +22,8 @@ const Navbar = () => {
         ))}
       </nav>
 
-      <div className="flex items-center">
+      <div className="flex items-center gap-3">
+        <SoundToggle />
         <button
           aria-label="Toggle Dark Mode"
           className="text-muted-foreground hover:text-foreground transition-colors"
@@ -34,3 +36,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -8,7 +8,7 @@ export const profileConfig = {
     "Open-Source Contributor",
   ],
   location: "Kerala, India",
-  email: "hello@althafka.com",
+  email: "althafkadev@gmail.com",
   bio: "Building exceptional digital products, exploring new technologies, and always learning.",
   socials: [
     {
@@ -30,6 +30,6 @@ export const profileConfig = {
       name: "Telegram",
       url: "https://t.me/althafka",
       icon: "telegram",
-    }
+    },
   ],
 };

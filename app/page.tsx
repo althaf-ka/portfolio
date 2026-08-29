@@ -1,12 +1,13 @@
-import Container from "@/components/common/container";
-import Navbar from "@/components/common/navbar";
-import ProfileHeader from "@/components/home/profile-header";
+import { Container } from "@/components/common/container";
+
+import { ProfileHeader } from "./_components/profile-header";
+import { Stack } from "./_components/stack";
 
 export default function Home() {
   return (
-    <Container className="min-h-screen border-x pb-10">
-      <Navbar />
+    <Container>
       <ProfileHeader />
+      <Stack />
     </Container>
   );
 }
