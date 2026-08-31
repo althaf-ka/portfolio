@@ -15,7 +15,6 @@ import {
   GithubIcon,
   Hono,
   Javascript,
-  LinuxTux,
   McpIcon,
   MongodbIcon,
   Mysql,
@@ -37,6 +36,7 @@ import {
   Webhooks,
   _React as ReactIcon,
 } from "@dev.icons/react";
+import { LinuxTux } from "@dev.icons/react/mono";
 
 export const STACK = [
   // Core Languages & Frontend

@@ -1,3 +1,5 @@
+"use client";
+
 import { STACK } from "@/config/stack";
 import { Section } from "@/components/common/section";
 import {
@@ -6,17 +8,45 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import { useStackSound } from "./use-stack-sound";
+
 export function Stack() {
+  const playStackSound = useStackSound();
+
   return (
     <Section id="stack" title="Tech Stack">
       <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center">
-        {STACK.map((item) => {
+        {STACK.map((item, index) => {
           const Icon = item.icon;
           return (
             <Tooltip key={item.name}>
               <TooltipTrigger
                 aria-label={item.name}
                 className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg bg-transparent transition-transform duration-200 ease-out hover:scale-115 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-foreground"
+                onPointerEnter={(event) => {
+                  if (event.pointerType !== "mouse") {
+                    return;
+                  }
+
+                  playStackSound(
+                    item.name,
+                    index,
+                    event.currentTarget,
+                    "hover",
+                  );
+                }}
+                onPointerDown={(event) => {
+                  if (event.pointerType !== "mouse") {
+                    return;
+                  }
+
+                  playStackSound(
+                    item.name,
+                    index,
+                    event.currentTarget,
+                    "press",
+                  );
+                }}
               >
                 <Icon className="size-7 sm:size-8" />
               </TooltipTrigger>
