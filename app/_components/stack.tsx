@@ -14,7 +14,7 @@ export function Stack() {
   const playStackSound = useStackSound();
 
   return (
-    <Section id="stack" title="Tech Stack">
+    <Section className="pb-4 sm:pb-5" id="stack" title="Tech Stack">
       <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center">
         {STACK.map((item, index) => {
           const Icon = item.icon;
