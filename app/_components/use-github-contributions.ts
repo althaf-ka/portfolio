@@ -28,6 +28,7 @@ const INITIAL_STATE: GitHubContributionsState = {
 
 export function useGitHubContributions(
   username: string,
+  year: number | "last" = "last",
 ): GitHubContributionsState {
   const [state, setState] =
     useState<GitHubContributionsState>(INITIAL_STATE);
@@ -39,7 +40,7 @@ export function useGitHubContributions(
       try {
         const contributions = await fetchGitHubContributions({
           username,
-          year: new Date().getUTCFullYear(),
+          year,
           signal: controller.signal,
         });
 
@@ -56,7 +57,7 @@ export function useGitHubContributions(
     void loadContributions();
 
     return () => controller.abort();
-  }, [username]);
+  }, [username, year]);
 
   return state;
 }

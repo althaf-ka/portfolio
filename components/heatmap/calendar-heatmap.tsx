@@ -329,6 +329,21 @@ const groupContinuous = (
     .fill(undefined)
     .map((_, i) => padded.slice(i * 7, i * 7 + 7));
 
+  if (numberOfWeeks <= 54) {
+    const lastActivity = normalizedActivities.at(-1);
+    const year = lastActivity
+      ? getYear(parseISO(lastActivity.date))
+      : getYear(firstDate);
+
+    return [
+      {
+        year,
+        startMonth: getMonth(firstDate),
+        weeks: allWeeks,
+      },
+    ];
+  }
+
   const yearMap = new Map<number, Week[]>();
   for (const week of allWeeks) {
     const firstActivity = week.find((a) => a !== undefined);
@@ -343,11 +358,18 @@ const groupContinuous = (
 
   return Array.from(yearMap.entries())
     .sort(([a], [b]) => a - b)
-    .map(([year, weeks]) => ({
-      year,
-      startMonth: 0,
-      weeks,
-    }));
+    .map(([year, weeks]) => {
+      const firstWeekActivity = weeks[0]?.find((a) => a !== undefined);
+      const startMonth = firstWeekActivity
+        ? getMonth(parseISO(firstWeekActivity.date))
+        : 0;
+
+      return {
+        year,
+        startMonth,
+        weeks,
+      };
+    });
 };
 
 const getMonthLabels = (
@@ -739,7 +761,6 @@ export const CalendarHeatmapBody = ({
     labelHeight,
     fontSize,
     weekStart,
-    data,
   } = useCalendarHeatmap();
 
   const weekdayLabelWidth = hideWeekdayLabels ? 0 : 40;
@@ -751,9 +772,13 @@ export const CalendarHeatmapBody = ({
         yearRow.weeks.length * (blockWidth + blockMargin) - blockMargin;
       const height = labelHeight + (blockSize + blockMargin) * 7 - blockMargin;
       const monthLabels = getMonthLabels(yearRow.weeks, labels.months);
-      const yearTotalCount = data
-        .filter((activity) => getYear(parseISO(activity.date)) === yearRow.year)
-        .reduce((sum, activity) => sum + activity.value, 0);
+      const rowActivities = yearRow.weeks
+        .flat()
+        .filter((a): a is ActivityWithLevel => a !== undefined);
+      const yearTotalCount = rowActivities.reduce(
+        (sum, activity) => sum + activity.value,
+        0,
+      );
 
       return {
         yearRow,
@@ -770,7 +795,6 @@ export const CalendarHeatmapBody = ({
     blockMargin,
     labelHeight,
     labels.months,
-    data,
   ]);
 
   const maxWidth = Math.max(...rowData.map((r) => r.width));

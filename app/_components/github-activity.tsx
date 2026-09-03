@@ -36,6 +36,9 @@ function ContributionCalendar({ data }: { data: Activity[] }) {
         empty: "var(--color-muted)",
         scale: "var(--color-primary)",
       }}
+      labels={{
+        heatmapLabel: "GitHub contribution heatmap for the last year",
+      }}
     >
       <CalendarHeatmapBody
         className="overflow-x-hidden pt-0 [&>div>svg]:h-auto [&>div>svg]:w-full"
@@ -61,9 +64,10 @@ function ContributionCalendar({ data }: { data: Activity[] }) {
               sideOffset={6}
             >
               <p>
-                {activity.value} contribution
-                {activity.value === 1 ? "" : "s"} on{" "}
-                {format(parseISO(activity.date), "MMM d, yyyy")}
+                {activity.value === 0
+                  ? "No contributions"
+                  : `${activity.value} contribution${activity.value === 1 ? "" : "s"}`}{" "}
+                on {format(parseISO(activity.date), "MMM d, yyyy")}
               </p>
             </TooltipContent>
           </Tooltip>
@@ -71,7 +75,7 @@ function ContributionCalendar({ data }: { data: Activity[] }) {
       </CalendarHeatmapBody>
 
       <CalendarHeatmapFooter>
-        <CalendarHeatmapStat label="{{value}} contributions · {{year}}" />
+        <CalendarHeatmapStat label="{{value}} contributions in the last year" />
         <CalendarHeatmapLegend />
       </CalendarHeatmapFooter>
     </CalendarHeatmap>

@@ -30,11 +30,11 @@ const isApiContribution = (value: unknown): value is ApiContribution => {
 
 export async function fetchGitHubContributions({
   username,
-  year,
+  year = "last",
   signal,
 }: {
   username: string;
-  year: number;
+  year?: number | "last";
   signal?: AbortSignal;
 }): Promise<GitHubContribution[]> {
   const url = new URL(
